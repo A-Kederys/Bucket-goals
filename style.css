@@ -1,0 +1,405 @@
+:root {
+    --color-accent: #8BC34A;
+    --color-bg: #101114;
+    --color-text: #F9F9F9;
+    --color-primary: #1f1f22d8;
+    --color-secondary: #4A4D57;
+    --color-warning: #FF6F61;
+    --color-alternative: #B0B0B0;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    padding: 10px;
+    background-color: var(--color-bg);
+    color: var(--color-text)
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin-top: 100px;
+    margin-bottom: 25px;
+    font-size: 48px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.wrapper {
+    width: 768px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+}
+
+
+/* input */
+.input-container input {
+    padding: 12px 20px;
+    padding-right: 55px;
+    width: 100%;
+    background: none;
+    border: 2px solid var(--color-primary);
+    caret-color: var(--color-accent);
+    color: var(--color-alternative);
+    border-radius: 5px;
+}
+
+.input-container input:focus {
+    outline: none;
+    border: 2px solid var(--color-accent);
+}
+
+.input-container input::placeholder {
+    color: var(--color-alternative);
+}
+
+.input-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.input-container button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    background-color: inherit;
+    height: 100%;
+    padding: 0 15px;
+    border: none;
+    border-left: 2px solid var(--color-primary);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--color-primary);
+    cursor: pointer;
+
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.input-container:focus-within button {
+    border-left: 2px solid var(--color-accent);
+}
+
+.input-container input:focus + button,
+.input-container input:not(:placeholder-shown) + button {
+    transform: translateX(0);
+    opacity: 1;
+    color: var(--color-accent);
+}
+
+.input-container:focus-within:not(:has(:focus-visible)) button {
+    border-left: 2px solid var(--color-primary);
+}
+
+.input-container:hover button {
+    transform: translateX(0);
+    opacity: 1;
+    color: var(--color-accent);
+}
+
+
+/* to-do */
+#todo-list {
+    list-style-type: none;
+}
+
+.todo-item {
+    margin-bottom: 10px;
+    padding: 0 10px;
+    background-color: var(--color-primary);
+    border-radius: 2.5px;
+    display: flex;
+    align-items: center;
+    
+    position: relative;
+    overflow: hidden;
+}
+
+.todo-item .text {
+    padding: 10px;
+    cursor: pointer;
+    flex-grow: 1;
+    user-select: none;
+    word-wrap: break-word;
+    word-break: break-word;
+    margin-right: -13px;
+}
+
+.delete-btn {
+    padding: 5px;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: auto;
+
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+}
+
+.delete-btn svg {
+    fill: var(--color-secondary);
+    width: 50px;
+    transition: 0.3s ease;
+}
+
+.delete-btn:hover svg {
+    fill: var(--color-warning);
+}
+
+.todo-item:hover .delete-btn {
+    transform: translateX(25%);
+    opacity: 1;
+}
+
+.todo-item:hover {
+    background-color: #18181bd8;
+}
+
+.custom-checkbox {
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    min-height: 20px;
+    min-width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox {
+    background-color: var(--color-accent);
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox svg {
+    fill: var(--color-bg);
+}
+
+input[type="checkbox"]:checked ~ .text {
+    text-decoration: line-through;
+    color: var(--color-secondary);
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+/* modal */
+.confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-content {
+    background-color: var(--color-bg);
+    padding: 20px 30px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.confirmation-content button {
+    padding: 4px 12px;
+    cursor: pointer;
+    border-radius: 2.5px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s ease;
+    margin-top: 20px;
+}
+
+#confirm-delete-btn {
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: var(--color-secondary);
+}
+
+#confirm-delete-btn:hover,
+#confirm-delete-btn:focus {
+    color: var(--color-warning);
+    outline: none;
+}
+
+#cancel-delete-btn {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    border: 1px solid transparent;
+}
+
+#cancel-delete-btn:hover,
+#cancel-delete-btn:focus  {
+    background-color: transparent;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    outline: none;
+}
+
+/* progress bar */
+.progress-container {
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 10px;
+    
+}
+
+.progress-background {
+    width: 100%;
+    height: 8px;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+    position: relative;
+
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--color-warning);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+    transform-origin: left center;
+}
+
+.progress-counter {
+    color: var(--color-alternative);
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    background-color: transparent;
+}
+
+.progress-bar.filled {
+    background-color: var(--color-accent);
+}
+
+.progress-counter.filled {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.counter-min, .counter-max {
+    color: inherit;
+}
+
+#progress-counter.partial {
+    border-color: var(--color-warning);
+}
+
+.counter-min.partial-color {
+    color: var(--color-warning);
+}
+
+
+/* tooltip */
+.tooltip {
+    position: absolute;
+    background-color: var(--color-bg);
+    color: var(--color-alternative);
+    padding: 5px 10px;
+    border: 1px solid var(--color-secondary);
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+    user-select: none;
+}
+
+/* placeholder */
+.todo-item.placeholder {
+    font-style: italic;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--color-primary);
+    border-radius: 2.5px;
+    display: flex;
+    justify-content: center;
+    color: var(--color-text);
+}
+
+@media(max-width: 576px) {
+    * {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-top: 50px;
+        margin-bottom: 12.5px;
+    }
+
+    .custom-checkbox {
+        height: 20px;
+        width: 20px;
+    }
+
+    .input-container button {
+        font-size: 28px;
+        transform: none;
+        opacity: 1;
+        color: var(--color-accent);
+    }
+    
+    .delete-btn {
+        opacity: 1;
+        transform: translateX(25%);
+    }
+
+    .input-container input {
+        padding-right: 50px;
+    }
+
+    .confirmation-content button {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .tooltip {
+        display: none;
+    }
+
+    .progress-counter {
+        font-size: 10px;
+        width: 30px;
+        height: 30px;
+        margin: 5px auto;
+    }
+}

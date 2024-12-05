@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="bucket.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Kibiras - Tvarkyk savo dieną</title>
+</head>
+<body>
+    <div class="todo-container">
+      <!-- title -->
+      <h1>Kibiras</h1>
+      <div class="wrapper">
+        <!-- input Field -->
+        <div class="input-container">
+          <input type="text" id="task-input" placeholder="Įrašykite užduotį..." autocomplete="off"/>
+          <button id="add-task-btn">+</button>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-background">
+              <div class="progress-bar" id="progress-bar" style="width: 0%;"></div>
+          </div>
+          <div id="progress-counter" class="progress-counter">
+            <span id="counter-max" class="counter-min">0</span><span id="counter-max" class="counter-max">/0</span>
+          </div>
+        </div>
+    
+        <!-- to-do list -->
+        <ul id="todo-list">
+          <!-- <li class="todo-item">
+            <input type="checkbox" id="todo-item-1" />
+            <label class="custom-checkbox" for="todo-item-1">
+              <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+              </svg>
+            </label>
+            <label class="text" for="todo-item-1">Užduoties tekstas</label>
+            <button class="delete-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+              </svg>
+            </button>
+          </li>
+        
+          <li class="todo-item">
+            <input type="checkbox" id="todo-item-2" />
+            <label class="custom-checkbox" for="todo-item-2">
+              <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+              </svg>
+            </label>
+            <label class="text" for="todo-item-2">Užduoties tekstas Užduoties Užduoties Užduoties UžduotiesUžduoties Užduoties UžduotiesUžduoties tekstas</label>
+            <button class="delete-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+              </svg>
+            </button>
+          </li> -->
+        </ul>
+        <div id="custom-tooltip" class="tooltip"></div>
+      </div>
+        <div id="confirmation-modal" class="confirmation-modal">
+          <div class="confirmation-content">
+              <p>Ar tikrai norite pašalinti šią užduotį?</p>
+              <button id="confirm-delete-btn">Taip</button>
+              <button id="cancel-delete-btn">Ne</button>
+          </div>
+      </div>
+  
+    <script src="app.js"></script>
+  </body>
+</html>
